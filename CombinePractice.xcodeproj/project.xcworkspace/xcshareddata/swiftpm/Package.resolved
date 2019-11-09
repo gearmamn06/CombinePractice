@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CoolLayout",
+        "repositoryURL": "https://github.com/gearmamn06/CoolLayout.git",
+        "state": {
+          "branch": null,
+          "revision": "d56629fca7863d1b507b5607d974b847c584b1ab",
+          "version": "1.0.3"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

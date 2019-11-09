@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		2B1DCE11237664E6002F702F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B1DCE10237664E6002F702F /* Assets.xcassets */; };
 		2B1DCE14237664E6002F702F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B1DCE12237664E6002F702F /* LaunchScreen.storyboard */; };
 		2B1DCE1F237664E6002F702F /* CombinePracticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1DCE1E237664E6002F702F /* CombinePracticeTests.swift */; };
+		2B1DCE2E2376691B002F702F /* CoolLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 2B1DCE2D2376691B002F702F /* CoolLayout */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B1DCE2E2376691B002F702F /* CoolLayout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +81,7 @@
 		2B1DCE06237664E4002F702F /* CombinePractice */ = {
 			isa = PBXGroup;
 			children = (
+				2B1DCE2B237668F6002F702F /* ReceivingEventAndHandle */,
 				2B1DCE07237664E4002F702F /* AppDelegate.swift */,
 				2B1DCE09237664E4002F702F /* SceneDelegate.swift */,
 				2B1DCE0B237664E4002F702F /* ViewController.swift */,
@@ -99,6 +102,13 @@
 			path = CombinePracticeTests;
 			sourceTree = "<group>";
 		};
+		2B1DCE2B237668F6002F702F /* ReceivingEventAndHandle */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ReceivingEventAndHandle;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -115,6 +125,9 @@
 			dependencies = (
 			);
 			name = CombinePractice;
+			packageProductDependencies = (
+				2B1DCE2D2376691B002F702F /* CoolLayout */,
+			);
 			productName = CombinePractice;
 			productReference = 2B1DCE04237664E4002F702F /* CombinePractice.app */;
 			productType = "com.apple.product-type.application";
@@ -165,6 +178,9 @@
 				Base,
 			);
 			mainGroup = 2B1DCDFB237664E4002F702F;
+			packageReferences = (
+				2B1DCE2C2376691B002F702F /* XCRemoteSwiftPackageReference "CoolLayout" */,
+			);
 			productRefGroup = 2B1DCE05237664E4002F702F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -469,6 +485,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2B1DCE2C2376691B002F702F /* XCRemoteSwiftPackageReference "CoolLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gearmamn06/CoolLayout.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2B1DCE2D2376691B002F702F /* CoolLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2B1DCE2C2376691B002F702F /* XCRemoteSwiftPackageReference "CoolLayout" */;
+			productName = CoolLayout;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2B1DCDFC237664E4002F702F /* Project object */;
 }
