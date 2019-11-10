@@ -47,7 +47,6 @@ extension ViewController {
         // ** uibinding이 구독이후 바로 메모리 해제되면서 cancel 되어서 그럼
         self.uibinding = NotificationCenter.default
             .publisher(for: UITextField.textDidChangeNotification, object: filterField)
-            .print()
             .sink(receiveValue: { _ in })
         
         // pub를 구독하려는 subscriber는 output - input 타입이 같아야함 + failure 타입도
@@ -58,7 +57,6 @@ extension ViewController {
         
         // sink -> subscribe(...) / bind의 경우는 assign
         let subscribing = pub
-            .print()
             // This method creates the subscriber and immediately requests an unlimited number of values, prior to returning the subscriber.
             .sink(receiveValue: { _ in })
         
@@ -70,12 +68,14 @@ extension ViewController {
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
-                    print("event stream2 finished")
+//                    print("event stream2 finished")
+                    break
                 case .failure(let never):
-                    print(never)
+//                    print(never)
+                    break
                 }
-            }, receiveValue: {
-                print("value2: \($0)")
+            }, receiveValue: { _ in
+//                print("value2: \($0)")
             })
     }
     
@@ -88,7 +88,6 @@ extension ViewController {
         // Cancellable이 deinit 하는 순간에 call cancel
         // sink 이후 반환되는 AnyCancellable은 class 타입
         let cle = pass
-            .print()
             .sink(receiveValue: { _ in })
         
         (0...10).forEach { v in
