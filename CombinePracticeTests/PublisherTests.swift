@@ -9,6 +9,8 @@
 import XCTest
 import Combine
 
+@testable import CombinePractice
+
 class CancellableBag {
 
     private var cancellables = [Cancellable]()

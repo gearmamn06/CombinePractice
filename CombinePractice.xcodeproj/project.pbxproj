@@ -13,19 +13,9 @@
 		2B1DCE0F237664E4002F702F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B1DCE0D237664E4002F702F /* Main.storyboard */; };
 		2B1DCE11237664E6002F702F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B1DCE10237664E6002F702F /* Assets.xcassets */; };
 		2B1DCE14237664E6002F702F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B1DCE12237664E6002F702F /* LaunchScreen.storyboard */; };
-		2B1DCE1F237664E6002F702F /* CombinePracticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1DCE1E237664E6002F702F /* CombinePracticeTests.swift */; };
-		2B1DCE2E2376691B002F702F /* CoolLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 2B1DCE2D2376691B002F702F /* CoolLayout */; };
+		9BC6D378239B6A370095EC71 /* MyParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC6D377239B6A370095EC71 /* MyParentView.swift */; };
+		9BC6D37B239B6C7C0095EC71 /* CoolLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 9BC6D37A239B6C7C0095EC71 /* CoolLayout */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		2B1DCE1B237664E6002F702F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2B1DCDFC237664E4002F702F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2B1DCE03237664E4002F702F;
-			remoteInfo = CombinePractice;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2B1DCE04237664E4002F702F /* CombinePractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CombinePractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,9 +26,9 @@
 		2B1DCE10237664E6002F702F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B1DCE13237664E6002F702F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B1DCE15237664E6002F702F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2B1DCE1A237664E6002F702F /* CombinePracticeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CombinePracticeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B1DCE20237664E6002F702F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B49396B2378269100C3EB04 /* PublisherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherTests.swift; sourceTree = "<group>"; };
+		9BC6D377239B6A370095EC71 /* MyParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyParentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,14 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B1DCE2E2376691B002F702F /* CoolLayout in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2B1DCE17237664E6002F702F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				9BC6D37B239B6C7C0095EC71 /* CoolLayout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +49,7 @@
 				2B1DCE06237664E4002F702F /* CombinePractice */,
 				2B1DCE1D237664E6002F702F /* CombinePracticeTests */,
 				2B1DCE05237664E4002F702F /* Products */,
+				9BC6D379239B6C7C0095EC71 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,7 +57,6 @@
 			isa = PBXGroup;
 			children = (
 				2B1DCE04237664E4002F702F /* CombinePractice.app */,
-				2B1DCE1A237664E6002F702F /* CombinePracticeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -81,7 +64,7 @@
 		2B1DCE06237664E4002F702F /* CombinePractice */ = {
 			isa = PBXGroup;
 			children = (
-				2B1DCE2B237668F6002F702F /* ReceivingEventAndHandle */,
+				9BC6D376239B6A260095EC71 /* SwiftUI */,
 				2B1DCE07237664E4002F702F /* AppDelegate.swift */,
 				2B1DCE09237664E4002F702F /* SceneDelegate.swift */,
 				2B1DCE0B237664E4002F702F /* ViewController.swift */,
@@ -102,11 +85,19 @@
 			path = CombinePracticeTests;
 			sourceTree = "<group>";
 		};
-		2B1DCE2B237668F6002F702F /* ReceivingEventAndHandle */ = {
+		9BC6D376239B6A260095EC71 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				9BC6D377239B6A370095EC71 /* MyParentView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		9BC6D379239B6C7C0095EC71 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = ReceivingEventAndHandle;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,29 +117,11 @@
 			);
 			name = CombinePractice;
 			packageProductDependencies = (
-				2B1DCE2D2376691B002F702F /* CoolLayout */,
+				9BC6D37A239B6C7C0095EC71 /* CoolLayout */,
 			);
 			productName = CombinePractice;
 			productReference = 2B1DCE04237664E4002F702F /* CombinePractice.app */;
 			productType = "com.apple.product-type.application";
-		};
-		2B1DCE19237664E6002F702F /* CombinePracticeTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2B1DCE26237664E6002F702F /* Build configuration list for PBXNativeTarget "CombinePracticeTests" */;
-			buildPhases = (
-				2B1DCE16237664E6002F702F /* Sources */,
-				2B1DCE17237664E6002F702F /* Frameworks */,
-				2B1DCE18237664E6002F702F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2B1DCE1C237664E6002F702F /* PBXTargetDependency */,
-			);
-			name = CombinePracticeTests;
-			productName = CombinePracticeTests;
-			productReference = 2B1DCE1A237664E6002F702F /* CombinePracticeTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -162,10 +135,6 @@
 				TargetAttributes = {
 					2B1DCE03237664E4002F702F = {
 						CreatedOnToolsVersion = 11.2;
-					};
-					2B1DCE19237664E6002F702F = {
-						CreatedOnToolsVersion = 11.2;
-						TestTargetID = 2B1DCE03237664E4002F702F;
 					};
 				};
 			};
@@ -186,7 +155,6 @@
 			projectRoot = "";
 			targets = (
 				2B1DCE03237664E4002F702F /* CombinePractice */,
-				2B1DCE19237664E6002F702F /* CombinePracticeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -202,13 +170,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2B1DCE18237664E6002F702F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -216,29 +177,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BC6D378239B6A370095EC71 /* MyParentView.swift in Sources */,
 				2B1DCE0C237664E4002F702F /* ViewController.swift in Sources */,
 				2B1DCE08237664E4002F702F /* AppDelegate.swift in Sources */,
 				2B1DCE0A237664E4002F702F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2B1DCE16237664E6002F702F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9B49396C2378269100C3EB04 /* PublisherTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		2B1DCE1C237664E6002F702F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2B1DCE03237664E4002F702F /* CombinePractice */;
-			targetProxy = 2B1DCE1B237664E6002F702F /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2B1DCE0D237664E4002F702F /* Main.storyboard */ = {
@@ -410,50 +356,6 @@
 			};
 			name = Release;
 		};
-		2B1DCE27237664E6002F702F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2ABNASUGL6;
-				INFOPLIST_FILE = CombinePracticeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = gearmamn06.CombinePracticeTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CombinePractice.app/CombinePractice";
-			};
-			name = Debug;
-		};
-		2B1DCE28237664E6002F702F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2ABNASUGL6;
-				INFOPLIST_FILE = CombinePracticeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = gearmamn06.CombinePracticeTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CombinePractice.app/CombinePractice";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -475,15 +377,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2B1DCE26237664E6002F702F /* Build configuration list for PBXNativeTarget "CombinePracticeTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2B1DCE27237664E6002F702F /* Debug */,
-				2B1DCE28237664E6002F702F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -498,7 +391,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2B1DCE2D2376691B002F702F /* CoolLayout */ = {
+		9BC6D37A239B6C7C0095EC71 /* CoolLayout */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2B1DCE2C2376691B002F702F /* XCRemoteSwiftPackageReference "CoolLayout" */;
 			productName = CoolLayout;
