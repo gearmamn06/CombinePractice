@@ -2,7 +2,7 @@
 
 
 ## TODO
-- Rx asSingle 빼껴서 asFuture() extension 생성(내부 구독 없는 방법?)
+- ~Rx asSingle 빼껴서 asFuture() extension 생성(내부 구독 없는 방법?)~
 - Publisher에 empty, never, fail, just 붙이기?
 
 ## 기록
@@ -144,7 +144,103 @@ MyView(model : modelInstance) // view has dependency on model
 
 
 ## TODO
-- 그럼 view -> external 이벤트전파는 어케함..
-- View에 ObservableObject  주입할때 추상화 방안..
-    - Presenter를 따로 분리해야하나?
-- view는 재사용성을 위하여 뎁스가 깊어지는데 상태관리는 단일 뷰모델로 하기 어려움 -> 뷰모델을 여러개 맨들어야하나?
+- ~그럼 view -> external 이벤트전파는 어케함..~
+- ~View에 ObservableObject  주입할때 추상화 방안..~
+    - ~Presenter를 따로 분리해야하나?~
+- ~view는 재사용성을 위하여 뎁스가 깊어지는데 상태관리는 단일 뷰모델로 하기 어려움 -> 뷰모델을 여러개 맨들어야하나?~
+
+
+### View -> External event 전파
+- 하위뷰에서 발생한 이벤트를 상위뷰를 통해 외부로 전파할때 하위뷰 + @State / 상위뷰 + @Binding의 관계가 아니라 하위뷰가 Binding을 주입받고 상위뷰가 source of truth를 들고있어함
+- Binding은 주입의 대상, 상위뷰가 Binding을 하위뷰로부터 주입 불가능
+- view에 Observable object주입, 하지만 ViewModel 전체가 ObservableObject일 필요는 없다 + ViewModel의 interactor interface가 @Publised 일 필요없다 + ViewModel이 reference type일 필요도 없다
+- ViewEventListener helper class 생성
+
+```swift
+import Combine
+import SwiftUI
+
+
+public class ViewEventObserver<Value>: ObservableObject {
+    
+    @Published public var observingValue: Value
+    public var receivingNewValues: ((Value) -> Void)?
+    private var observing: AnyCancellable?
+    
+    public init(_ defaultValue: Value, callback: ((Value) -> Void)? = nil) {
+        self.observingValue = defaultValue
+        self.receivingNewValues = callback
+        
+        self.observing = self.$observingValue
+            .sink(receiveValue: { [weak self] value in
+                self?.receivingNewValues?(value)
+            })
+    }
+    
+    deinit {
+        observing?.cancel()
+    }
+}
+
+...
+
+fileprivate struct SearchView: View {
+    
+    @Binding var isSearching: Bool
+    @Binding var inputTxt: String
+    
+    private let searchCalled: () -> Void
+    
+    init(isSearching: Binding<Bool>, inputTxt: Binding<String>, closure: @escaping () -> Void) {
+        self._isSearching = isSearching
+        self._inputTxt = inputTxt
+        self.searchCalled = closure
+    }
+    
+    var body: some View {
+        ZStack {
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(Color.gray)
+                
+                TextField("place holder", text: $inputTxt) {
+                    UIApplication.shared.endEditing()
+                    self.searchCalled()
+                }
+                
+                ActivityIndicator(isAnimating: $isSearching, style: .medium)
+                if inputTxt.isEmpty == false && isSearching == false {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(Color.gray.opacity(0.8))
+                        .onTapGesture {
+                            self.inputTxt = ""
+                    }
+                }
+            }
+            
+        }
+        .padding(12)
+        .background(
+            Rectangle()
+                .foregroundColor(Color.gray.opacity(0.2))
+                .cornerRadius(10)
+        )
+    }
+}
+
+public struct AddItemMainView: View {
+    private let viewModel: AddItemViewModelType
+    @ObservedObject private var textInputListener = ViewEventObserver<String>("")
+    
+    var body: some View {
+      ...
+      SearchView(isSearching: $isSearching,
+                              inputTxt: $textInputListener.observingValue)
+    }
+}
+
+```
+
+## TODO
+- ViewModel을 struct으로 전환시키기 위해 cancelbag
+- source of truth를 최소화하기 위하여 ViewEventObserver의 발류타입이 enum 형태인경우 가능?
