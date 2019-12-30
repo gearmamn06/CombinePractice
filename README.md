@@ -153,7 +153,6 @@ MyView(model : modelInstance) // view has dependency on model
 ### View -> External event 전파
 - 하위뷰에서 발생한 이벤트를 상위뷰를 통해 외부로 전파할때 하위뷰 + @State / 상위뷰 + @Binding의 관계가 아니라 하위뷰가 Binding을 주입받고 상위뷰가 source of truth를 들고있어함
 - Binding은 주입의 대상, 상위뷰가 Binding을 하위뷰로부터 주입 불가능
-- view에 Observable object주입, 하지만 ViewModel 전체가 ObservableObject일 필요는 없다 + ViewModel의 interactor interface가 @Publised 일 필요없다 + ViewModel이 reference type일 필요도 없다
 - ViewEventListener helper class 생성
 
 ```swift
@@ -240,6 +239,41 @@ public struct AddItemMainView: View {
 }
 
 ```
+## Data 흐름
+- ViewModel내 상태변화 -> View 렌더링(+ subscribe 초기화)
+```swift
+// ViewModel
+private let _items = CurrentValueSubject<[SettingRowItem], Never>([])
+private let _isCacheClearing = CurrentValueSubject<Bool, Never>(false)
+
+public func clearCachedData() {
+  self._isCacheClearing.send(true)
+  self.usecase.clearMediaCache()
+      .sink(receiveCompletion: { _ in },
+            receiveValue: { _ in
+              self._isCacheClearing.send(false)
+      })
+      .store(in: &self.cancelBag)
+}
+
+public var items: AnyPublisher<[SettingRowItem], Never> {
+    return Publishers
+        .CombineLatest(self._items.dropFirst(), self._isCacheClearing)
+        .map { source, isClearing -> [SettingRowItem] in
+            guard let index = source.cacheIndex else {
+                return source
+            }
+            var sender = source
+            sender[index] = .row(.clearCache(isClearing))
+            return sender
+        }
+        .eraseToAnyPublisher()
+}
+```
+- 위의 경우 _items, _isCacheClearing 변화에 따라 items 값 변화 -> 뷰 렌더링 -> 구독 초기화 -> 이전값으로 이벤트 재발생 -> 무한루프
+- clearCachedData() 메소드 내부에서 _items에 변화를 가하고 이로인해 view가 다시 그려지도록 유도해야함
+- ViewModel이 뷰를 그린다(기존의 View가 ViewModel을 소유하고 상태를 구독하는 방식은 x)
+
 
 ## TODO
 - ViewModel을 struct으로 전환시키기 위해 cancelbag
