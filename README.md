@@ -243,4 +243,22 @@ public struct AddItemMainView: View {
 
 ## TODO
 - ViewModel을 struct으로 전환시키기 위해 cancelbag
-- source of truth를 최소화하기 위하여 ViewEventObserver의 발류타입이 enum 형태인경우 가능?
+- ~source of truth를 최소화하기 위하여 ViewEventObserver의 발류타입이 enum 형태인경우 가능?~
+
+
+## View 이벤트 상태 관리
+1. alert or actionSheet
+- 해당 뷰를 발생시키는 이벤트 트리깅 뷰 이후에 묶거나 전체 뷰에 묶을 수 있음
+- 뷰 트리깅 이벤트는 Binding<Bool>, Binding<Identifiable: Hashable>이 가능, 후자를 이용하면 특정 데이터에 대한 알러트 생성 가능
+2. NavigationLink
+- 트리깅하는 뷰에 바로 밖아버리는 방법밖에 없음..
+- tag: Hashable를 이용하여 링크 생성 및 분기 가능
+
+뷰모델이 ObservableObject이 아닌이상 뷰의 전역변수에 @State 선언해주는것이 지금으로는 최선 -> 위와같이 이벤트와 관련된 플래그를 랩핑하는것과 같은 방법 고민 필요
+
+## SceneBuilder
+- 뷰 내부에서 다음뷰와 직접적으로 연결해줘야함(개짜증)
+- 라우팅로직이 뷰 내부의 특정 부분에 묶일수밖에 없음...(트리깅은 외부에서 가능)
+- 이를 해결하기 위하여 현재 화면이 다음 화면에대한 의존을 갖는 부분이 썩 내키지 않음 + 현재 Scene별로 프레임워크로 분리된 프로젝트 구조에 적절하지 않다 
+- Scene별 SceneBuilder protocol로 정의, View가 이를 주입받도록하고 builder의 구현체에서 computed property 혹은 lazy property를 이용하여 다음 View와 연결
+- 최종단계에 app level의 DI Container가 하위 뷰들의 프로토콜들을 준수하며 기능을 구현하게하고 뷰에 주입하는 방법 이용할꺼임
