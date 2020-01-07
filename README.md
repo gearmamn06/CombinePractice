@@ -296,3 +296,7 @@ public var items: AnyPublisher<[SettingRowItem], Never> {
 - 이를 해결하기 위하여 현재 화면이 다음 화면에대한 의존을 갖는 부분이 썩 내키지 않음 + 현재 Scene별로 프레임워크로 분리된 프로젝트 구조에 적절하지 않다 
 - Scene별 SceneBuilder protocol로 정의, View가 이를 주입받도록하고 builder의 구현체에서 computed property 혹은 lazy property를 이용하여 다음 View와 연결
 - 최종단계에 app level의 DI Container가 하위 뷰들의 프로토콜들을 준수하며 기능을 구현하게하고 뷰에 주입하는 방법 이용할꺼임
+
+-> 이거 팩토리로 맨들어도 NavigationLink에 destination 지정해줄때 생성됨 존나얼탱이없음
+
+## SwiftUI는 뷰그리는것만 하고 결국 호스팅 UIViewController로 라우팅을 해보자..
