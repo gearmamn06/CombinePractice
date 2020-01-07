@@ -298,5 +298,11 @@ public var items: AnyPublisher<[SettingRowItem], Never> {
 - 최종단계에 app level의 DI Container가 하위 뷰들의 프로토콜들을 준수하며 기능을 구현하게하고 뷰에 주입하는 방법 이용할꺼임
 
 -> 이거 팩토리로 맨들어도 NavigationLink에 destination 지정해줄때 생성됨 존나얼탱이없음
+- 뷰 init 부분에서 서부뷰 전부를 그리면 안되고 onAppear에서 그리기 시작해야 벙찌는거 사라짐
 
 ## SwiftUI는 뷰그리는것만 하고 결국 호스팅 UIViewController로 라우팅을 해보자..
+- 진짜 뷰는 그리는일이랑 유저인풋 받는일만 하게함, 인터페이스빌더 코드로 짠다고 생각하자..swiftUI로는 이게 최선임 ㅇㅇ
+- 호스팅 뷰 컨에서 라우팅을 담당하게 하거나 기존 방식의 코디네이터로 네비게이션 구성
+- 이경우 뷰가 닫히는 이벤트에 대해서도 라우팅로직 추가되어야함
+
+
