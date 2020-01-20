@@ -306,3 +306,43 @@ public var items: AnyPublisher<[SettingRowItem], Never> {
 - 이경우 뷰가 닫히는 이벤트에 대해서도 라우팅로직 추가되어야함
 - 호스팅 뷰컨 네비바 숨기고 스윕체스처로 백 가능하게 해둬야함
 
+
+## 기록 -> 뷰 타이밍
+- 상황: 뷰에 onReceive를 이용하여 ViewModel의 상태변화 수신 -> @State 변경으로 뷰 변화 + 뷰 초기화시점에 초기데이터 로딩 요청 + onAppear 부터 뷰를 그리기 시작하는 상황
+- 가정1: 초기데이터 로딩이 지연되는 경우 -> 데이터 수신 이후 렌더링 / 데이터 지연이 없어 onAppear 보다 먼저 불리는 경우 -> 대기 이후 초기데이터 렌더링
+- 문제점: _viewIsReady passThroughSubject를 이용하여 최초 이벤트발생시까지 대기, 데이터소스는 CurrentValueSubjet로 선언하여 viewIsReady 이벤트 발생 이후 마지막 발류를 반환 하려함
+```swift
+
+// view
+@State private var cellViewModels: [SearchHistoryCellViewModel] = []
+public var body: some View {
+      List { ... }
+        .onReceive(self.viewModel.cellViewModels) { newValues in
+                self.cellViewModels = newValues
+        }
+        ...
+        .onAppear {
+            self.viewModel.viewIsReady()
+        }
+}
+
+
+// viewModel
+public var cellViewModels: AnyPublisher<[SearchHistoryCellViewModel], Never> {
+        
+      return _viewIsReady
+          .first()
+          .map{ _ in [] }
+          .append(_combinedCellViewModels)
+//          .dropFirst() // drop 해도 안해도 append 상단에 이벤트 발생이 없어서 동작 x
+          .eraseToAnyPublisher()
+  }
+```
+- 원인: 뷰에 publisher가 바인딩 되는 시점이 맨 마지막이여서(viewDidLoad에서 바인딩 먼저 하던시절과 다름..) _viewIsReady.first() 이벤트는 진작에 발생 -> 뷰에 바인딩 되는 시점에 발생할 _viewIsReady 이벤트 없음 다운스트림 작동 x
+- 해결책: 뷰바인딩이 제일 나중에 일어남으로 (appear 이후 body 가 그려질때) + 재바인딩이 일어날 수 있으므로 위의 케이스 신경 안써도됨, 최초 데이터 로딩이 지연되 onAppear 이후에 이벤트가 전달된다면 정상 동작
+- 위 로직에서는 _viewIsReady를 currentValueSubject로 변경하면 될꺼같긴 하지만 무의미
+- 바인딩이 제일 나중에 일어나기 때문에 데이터소스는 핫옵져블이여야만함
+
+
+
+
