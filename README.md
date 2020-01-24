@@ -344,5 +344,10 @@ public var cellViewModels: AnyPublisher<[SearchHistoryCellViewModel], Never> {
 - 바인딩이 제일 나중에 일어나기 때문에 데이터소스는 핫옵져블이여야만함
 
 
+## 기록2 -> ForEach
+- id 잘못제공하면 list 갱신 x
+
+
+
 
 
