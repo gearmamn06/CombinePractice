@@ -348,6 +348,13 @@ public var cellViewModels: AnyPublisher<[SearchHistoryCellViewModel], Never> {
 - id 잘못제공하면 list 갱신 x
 
 
+##  기록3 - UIViewRepresentable로 UIView 재사용하기
+- UIViewRepresentable을 따르는 중간객체, 상태느 @Binding으로
+- 중간객체에서 makeUIView에서 UIView리턴하고 updateUIView에서 상태에따른 뷰 업데이트
+- UIViewRepresentable을 이용하여 View생성, @State를 지님 onReceive에서 상태 업데이트(publishers from viewModel)
+- @State 변경에따라 UIViewRepresentable을의 updateUIView 호출
+- dismantleUIView에서 teardown 가능 (에니메이셔 중지 등)
+
 
 
 
